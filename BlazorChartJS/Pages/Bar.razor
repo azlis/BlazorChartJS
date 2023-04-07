@@ -1,18 +1,22 @@
 ﻿@page "/Bar"
 @inject IJSRuntime JS
 
-<PageTitle>Bar-Chart</PageTitle>
+<PageTitle>Bar Chart</PageTitle>
 
-<div class="chart" />
+<div class="chart">
+    <canvas id="BarChart"></canvas>
+</div>
 
 @code {
+    private Random random = new Random();
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             var jsmodule = $"./{($"{this}").Replace("BlazorChartJS.", "").Replace(".", "/")}.razor.js";
             var jSObject = await JS.InvokeAsync<IJSObjectReference>("import", jsmodule);
-            await jSObject.InvokeVoidAsync("barChart");
+            var data = Enumerable.Range(1, 7).Select(x => x = random.Next(9, 99)).ToArray();
+            await jSObject.InvokeVoidAsync("barChart", data);
         }
         await base.OnAfterRenderAsync(firstRender);
     }
