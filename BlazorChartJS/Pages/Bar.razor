@@ -1,29 +1,19 @@
 ﻿@page "/Bar"
 @inject IJSRuntime JS
 
-<PageTitle>BlazorWithChartJS</PageTitle>
-
-<p>
-    <Button @onclick="OnClick" >Test</Button>
-</p>
+<PageTitle>Bar-Chart</PageTitle>
 
 <div class="chart" />
 
 @code {
-    private IJSObjectReference jSObject { get; set; }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             var jsmodule = $"./{($"{this}").Replace("BlazorChartJS.", "").Replace(".", "/")}.razor.js";
-            jSObject = await JS.InvokeAsync<IJSObjectReference>("import", jsmodule);
+            var jSObject = await JS.InvokeAsync<IJSObjectReference>("import", jsmodule);
+            await jSObject.InvokeVoidAsync("barChart");
         }
         await base.OnAfterRenderAsync(firstRender);
-    }
-
-    private async void OnClick()
-    {
-        await jSObject.InvokeVoidAsync("barChart");
     }
 }
