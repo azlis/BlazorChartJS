@@ -1,0 +1,23 @@
+﻿@page "/AreaChart"
+@inject IJSRuntime JS
+
+<PageTitle>Area Chart</PageTitle>
+
+<div class="chart">
+    <canvas id="AreaChart"></canvas>
+</div>
+
+@code {
+    private Random random = new Random();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var jsmodule = $"./{($"{this}").Replace("BlazorChartJS.", "").Replace(".", "/")}.razor.js";
+            var jSObject = await JS.InvokeAsync<IJSObjectReference>("import", jsmodule);
+            var data = Enumerable.Range(1, 8).Select(x => x = random.Next(9, 99)).ToArray();
+            await jSObject.InvokeVoidAsync("areaChart", data);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}
