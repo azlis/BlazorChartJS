@@ -1,5 +1,10 @@
 export function barChart() {
+    var charts = $("div.chart");
+    $(charts[0]).children().remove();
+    $(charts[0]).append($("<canvas />", { id: "myChart", style: "height: 160px" }));
+
     const ctx = document.getElementById('myChart');
+
     new Chart(ctx, {
         type: 'bar',
         data: {
