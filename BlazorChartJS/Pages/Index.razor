@@ -2,3 +2,29 @@
 @inject IJSRuntime JS
 
 <PageTitle>BlazorWithChartJS</PageTitle>
+
+<p>
+    <h2>
+        在Blazor中使用 <code><strong>JavaScript </strong></code>
+        调用
+        <code><strong>Chart.JS</strong></code>
+        绘制曲线图
+    </h2>
+</p>
+<div class="chart">
+    <canvas id="AnimationsChart"></canvas>
+</div>
+
+@code {
+    private Random random = new Random();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var jsmodule = $"./{($"{this}").Replace("BlazorChartJS.", "").Replace(".", "/")}.razor.js";
+            var jSObject = await JS.InvokeAsync<IJSObjectReference>("import", jsmodule);
+            await jSObject.InvokeVoidAsync("animationsChart");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

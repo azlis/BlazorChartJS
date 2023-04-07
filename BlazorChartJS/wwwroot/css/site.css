@@ -67,9 +67,8 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
-
 .chart{
     height:400px;
     width:800px;
-    border:groove;
+    border:azure;
 }
