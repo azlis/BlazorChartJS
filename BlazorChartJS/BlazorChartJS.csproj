@@ -6,4 +6,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Npm\**" />
+    <Content Remove="Npm\**" />
+    <EmbeddedResource Remove="Npm\**" />
+    <None Remove="Npm\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\showChartJS.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BootstrapBlazor" Version="7.5.1-beta02" />
+    <PackageReference Include="BootstrapBlazor.Chart" Version="7.1.1" />
+    <PackageReference Include="BootstrapBlazor.FontAwesome" Version="7.3.0" />
+  </ItemGroup>
+
 </Project>

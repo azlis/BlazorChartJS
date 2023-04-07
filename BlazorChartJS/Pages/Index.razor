@@ -1,7 +1,27 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 
-<PageTitle>Index</PageTitle>
+<PageTitle>BlazorWithChartJS</PageTitle>
 
-<h1>Hello, world!</h1>
+<p>
+    <Button Color="Color.Primary" Icon="fa-solid fa-font-awesome" Text="测试" OnClick="@OnClick" />
+</p>
 
-Welcome to your new app.
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@code {
+    private IJSObjectReference jSObject { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        jSObject = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+    }
+
+    private async void OnClick()
+    {
+        await jSObject.InvokeVoidAsync("barChart");
+    }
+}
