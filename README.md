@@ -100,8 +100,6 @@
 
 8. 运行Blazor应用程序，您应该能够看到您的Chart.js图表！
 
-![blazorChartJS][blazorChartJSRunPng]
+![blazorChartJS](https://user-images.githubusercontent.com/33386249/230702691-dedf1a0c-92e3-446a-8137-1be4a8dd854b.png)
 
 更多图表类型等信息，请参阅Chart.js官方文档。
-
-[blazorChartJSRunPng]: /BlazorChartJS/blazorChartJS.png
